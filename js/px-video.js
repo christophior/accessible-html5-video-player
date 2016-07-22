@@ -130,19 +130,21 @@ function InitPxVideo(options) {
 		if (document.fullscreen || document.mozFullScreen || document.webkitIsFullScreen || document.msFullscreenElement) {
 			obj.fullScreenBtn.checked = true;
 			//must apply other styles in container
-			obj.container.setAttribute("style", "width: 100%; height: 100%;");
-			obj.controls.className = "px-video-controls js-fullscreen-controls";
-			obj.captionsContainer.className = "px-video-captions js-fullscreen-captions";
-			obj.movie.setAttribute('width', '100%');
-			obj.movie.setAttribute('height', '100%');
+			obj.container.style.cssText = 'width: 100%; height: 100%;';
+			obj.controls.className = 'px-video-controls js-fullscreen-controls';
+			obj.captionsContainer.className = 'px-video-captions js-fullscreen-captions';
+			obj.movie.style.cssText = 'width: 100%; height: 100%;';
+			obj.movie.width = '';
+			obj.movie.height = '';
 		} else {
 			obj.fullScreenBtn.checked = false;
-	    // revert back to default styles
-	    obj.container.setAttribute("style", "width:" + obj.movieWidth + "px");
-			obj.controls.className = "px-video-controls";
-			obj.captionsContainer.className = "px-video-captions";
-	    obj.movie.setAttribute('width', obj.movieWidth);
-			obj.movie.setAttribute('height', obj.movieHeight);
+			// revert back to default styles
+			obj.container.style.cssText = 'width:' + obj.movieWidth + 'px';
+			obj.controls.className = 'px-video-controls';
+			obj.captionsContainer.className = 'px-video-captions';
+			obj.movie.style.cssText = '';
+			obj.movie.width = obj.movieWidth;
+			obj.movie.height = obj.movieHeight;
 		}
 	}
 
@@ -150,7 +152,7 @@ function InitPxVideo(options) {
 	function exitFullScreen() {
 		// get appropriate vendor prefix and then call it with respect to the document
 		var exitFullScreen = document.exitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
-    exitFullScreen.call(document);
+		exitFullScreen.call(document);
 	}
 
 	// Global variable
